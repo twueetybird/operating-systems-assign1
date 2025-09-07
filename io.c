@@ -5,9 +5,15 @@
 #include "io.h"
 
 /* Reads next char from stdin. If no more characters, it returns EOF */
-int
-read_char() {
-  return EOF;
+int read_char() {
+    unsigned char c;  
+    ssize_t n = read(0, &c, 1);   // read 1 byte stdin
+
+    if (n <= 0) {                 // if read() returns 0 or -1 (EOF)
+        return EOF;               // signal end of input
+    }
+
+    return c;                     // return the character as an int
 }
 
 /* Writes c to stdout.  If no errors occur, it returns 0, otherwise EOF */
