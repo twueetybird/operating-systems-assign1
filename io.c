@@ -19,7 +19,15 @@ int read_char() {
 /* Writes c to stdout.  If no errors occur, it returns 0, otherwise EOF */
 int
 write_char(char c) {
-  return EOF;
+
+  ssize_t error = write(1, &c, 1);
+  
+  if(error == -1){
+    return EOF;
+  }
+  
+  return 0;
+
 }
 
 /* Writes a null-terminated string to stdout.  If no errors occur, it returns 0, otherwise EOF */
@@ -33,5 +41,12 @@ write_string(char* s) {
  */
 int
 write_int(int n) {
-  return EOF;
+
+  int error = write(1, &n, 4);
+  
+  if(error == -1){
+    return EOF;
+  }
+  
+  return 0;
 }
