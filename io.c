@@ -33,7 +33,20 @@ write_char(char c) {
 /* Writes a null-terminated string to stdout.  If no errors occur, it returns 0, otherwise EOF */
 int
 write_string(char* s) {
-  return EOF;
+
+  int lenght = 0;
+
+  while (s[lenght] != '\0') {
+    lenght++;
+  }
+
+  ssize_t error = write(1, s, lenght);
+
+  if(error == -1){
+    return EOF;
+  }
+
+  return 0;
 }
 
 /* Writes n to stdout (without any formatting).   
@@ -42,11 +55,16 @@ write_string(char* s) {
 int
 write_int(int n) {
 
-  int error = write(1, &n, 4);
+  if(n >= 10){
+    write_int(n/10);
+  }
+
+  ssize_t error = write_char('0' + (n % 10));
   
-  if(error == -1){
-    return EOF;
+  
+  if(error == 0){
+    return 0;
   }
   
-  return 0;
-}
+  return EOF;
+
