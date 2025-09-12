@@ -20,9 +20,9 @@ int read_char() {
 int
 write_char(char c) {
 
-  ssize_t error = write(1, &c, 1);
+  ssize_t error = write(1, &c, 1);    // Write 1 char to stdout
   
-  if(error == -1){
+  if(error == -1){                    // If we get -1 we got a error else we return 0
     return EOF;
   }
   
@@ -34,15 +34,15 @@ write_char(char c) {
 int
 write_string(char* s) {
 
-  int lenght = 0;
+  int lenght = 0;                         // We need to find the length of our string so we know how many bytes to write
 
-  while (s[lenght] != '\0') {
+  while (s[lenght] != '\0') {             // Run a while loop that keeps incrementing our lenght counter as long as we havent reach the end '\0'
     lenght++;
   }
 
-  ssize_t error = write(1, s, lenght);
+  ssize_t error = write(1, s, lenght);    // Now we know the length so we can write s out on stdout 
 
-  if(error == -1){
+  if(error == -1){                        // If we got -1 then we have a error else we return 0
     return EOF;
   }
 
